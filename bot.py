@@ -10,8 +10,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-fb_group_id = int(os.environ["ADMIN_GROUP_ID"])
-nv_group_id = int(os.environ["NOVICE_GROUP_ID"])
+fb_group_id = os.environ["ADMIN_GROUP_ID"]
 users = list(map(int, os.environ["USERS"].split()))
 issues = {}
 
