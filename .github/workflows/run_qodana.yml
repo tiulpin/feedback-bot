@@ -1,0 +1,32 @@
+name: Qodana IntelliJ
+on:
+  workflow_dispatch:
+jobs:
+  qodana:
+    runs-on: ubuntu-latest
+    steps:
+      # clone your project
+      # - uses: actions/checkout@v2
+      # or clone any other project
+      - uses: actions/checkout@v2
+      - run: | 
+          docker run --rm \
+          -v ${{ github.workspace }}/:/data/project/ \
+          --entrypoint=bash \
+          jetbrains/qodana -c '
+            python3 -m venv /data/cache/venv
+            source /data/cache/venv/bin/activate
+            pip3 install -r /data/project/requirements.txt
+          '
+      # run qodana-license-audit
+      - name: Qodana
+        uses: tiulpin/qodana-action@main
+      - uses: actions/upload-artifact@v2
+        with:
+          path: ${{ github.workspace }}/qodana
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ${{ github.workspace }}/qodana/report
+          destination_dir: ./
