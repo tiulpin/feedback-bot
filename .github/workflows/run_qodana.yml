@@ -14,8 +14,8 @@ jobs:
           -v ${{ github.workspace }}/:/data/project/ \
           --entrypoint=bash \
           jetbrains/qodana -c '
-            python3 -m venv /data/cache/venv
-            source /data/cache/venv/bin/activate
+            python3 -m venv /data/project/.venv
+            source /data/project/.venv/bin/activate
             pip3 install -r /data/project/requirements.txt
           '
       # run qodana-license-audit
