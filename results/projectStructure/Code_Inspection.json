@@ -17,7 +17,7 @@
           "type": "Own sources"
         },
         {
-          "name": "Python 3.8 interpreter library",
+          "name": "Python 3.8 virtualenv at /data/project/.venv interpreter library",
           "type": "Library"
         }
       ]
